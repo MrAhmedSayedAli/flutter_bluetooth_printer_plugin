@@ -100,7 +100,9 @@ public class BluetoothPrinterManager {
     
 
     public var nearbyPrinters: [BluetoothPrinter] {
-        return centralManagerDelegate.discoveredPeripherals.values.map { BluetoothPrinter($0) }
+        return centralManagerDelegate.discoveredPeripherals.values.map {
+           return BluetoothPrinter($0)
+        }
     }
 
     public init(delegate: PrinterManagerDelegate? = nil, didInitialized: ((CBManagerState) -> ())? = nil) {
@@ -205,7 +207,8 @@ public class BluetoothPrinterManager {
         }
 
         let serviceUUIDs = BluetoothPrinterManager.specifiedServices.map { CBUUID(string: $0) }
-        centralManager.scanForPeripherals(withServices: serviceUUIDs, options: nil)
+        
+        centralManager.scanForPeripherals(withServices: nil, options: nil)
 
         return nil
     }

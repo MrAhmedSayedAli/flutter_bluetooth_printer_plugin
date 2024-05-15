@@ -198,18 +198,23 @@ public class SwiftFlutterBluetoothPrinterPlugin: NSObject, FlutterPlugin, Flutte
 
     private var eventSink: FlutterEventSink?
     public func onListen(withArguments arguments: Any?, eventSink events: @escaping FlutterEventSink) -> FlutterError? {
+        print("Event sink on listen")
         ensureManager {
             (state) in
             self.eventSink = events
 
+            print("We have a manager")
             self.bluetoothPrinterManager.stopScan()
             let err = self.bluetoothPrinterManager.startScan()
             if err == .deviceNotReady {
                 return
             }
+            
+            print("error: \(err)")
 
             for item in self.bluetoothPrinterManager.nearbyPrinters {
                 let device = self.deviceToMap(printer: item)
+                print("device exists: \(device)")
                 self.eventSink?(device)
             }
         }
