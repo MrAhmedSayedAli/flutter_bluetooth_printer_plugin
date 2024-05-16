@@ -67,50 +67,44 @@ class MethodChannelBluetoothPrinter extends FlutterBluetoothPrinterPlatform {
   }
 
   Stream<DiscoveryState> _discovery() async* {
-    try {
-      final result = await channel.invokeMethod('getState');
-      final state = _intToState(result);
-      print('state result: $state');
-      if (state == BluetoothState.notPermitted) {
-        yield PermissionRestrictedState();
-      }
-
-      if (state == BluetoothState.disabled) {
-        yield BluetoothDisabledState();
-      }
-
-      yield* discoveryChannel.receiveBroadcastStream(DateTime.now().millisecondsSinceEpoch).map(
-        (data) {
-          print('yield result: $data');
-          final code = data['code'];
-          final state = _intToState(code);
-
-          if (state == BluetoothState.notPermitted) {
-            return PermissionRestrictedState();
-          }
-
-          if (state == BluetoothState.disabled) {
-            return BluetoothDisabledState();
-          }
-
-          if (state == BluetoothState.enabled) {
-            return BluetoothEnabledState();
-          }
-
-          if (state == BluetoothState.permitted) {
-            return BluetoothDevice(
-              address: data['address'],
-              name: data['name'],
-              type: data['type'],
-            );
-          }
-
-          return UnknownState();
-        },
-      );
-    } on PlatformException catch (e) {
-      print('Exception: ${e.message}');
+    final result = await channel.invokeMethod('getState');
+    final state = _intToState(result);
+    if (state == BluetoothState.notPermitted) {
+      yield PermissionRestrictedState();
     }
+
+    if (state == BluetoothState.disabled) {
+      yield BluetoothDisabledState();
+    }
+
+    yield* discoveryChannel.receiveBroadcastStream(DateTime.now().millisecondsSinceEpoch).map(
+      (data) {
+        final code = data['code'];
+        final state = _intToState(code);
+
+        if (state == BluetoothState.notPermitted) {
+          return PermissionRestrictedState();
+        }
+
+        if (state == BluetoothState.disabled) {
+          return BluetoothDisabledState();
+        }
+
+        if (state == BluetoothState.enabled) {
+          return BluetoothEnabledState();
+        }
+
+        if (state == BluetoothState.permitted) {
+          return BluetoothDevice(
+            address: data['address'],
+            name: data['name'],
+            type: data['type'],
+          );
+        }
+
+        return UnknownState();
+      },
+    );
   }
 
   @override

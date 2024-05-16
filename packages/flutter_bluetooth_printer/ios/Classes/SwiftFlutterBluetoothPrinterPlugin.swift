@@ -209,8 +209,6 @@ public class SwiftFlutterBluetoothPrinterPlugin: NSObject, FlutterPlugin, Flutte
             if err == .deviceNotReady {
                 return
             }
-            
-            print("error: \(err)")
 
             for item in self.bluetoothPrinterManager.nearbyPrinters {
                 let device = self.deviceToMap(printer: item)
