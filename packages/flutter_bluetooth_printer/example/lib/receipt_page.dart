@@ -20,8 +20,7 @@ class _ReceiptPageState extends State<ReceiptPage> {
         actions: [
           IconButton(
             onPressed: () async {
-              final selected =
-                  await FlutterBluetoothPrinter.selectDevice(context);
+              final selected = await FlutterBluetoothPrinter.selectDevice(context);
               if (selected != null) {
                 setState(() {
                   address = selected.address;
@@ -141,7 +140,7 @@ class _ReceiptPageState extends State<ReceiptPage> {
               },
               onInitialized: (controller) {
                 setState(() {
-                  this.controller = controller;
+                  this.controller = controller..paperSize = PaperSize.mm57;
                 });
               },
             ),
@@ -154,10 +153,8 @@ class _ReceiptPageState extends State<ReceiptPage> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () async {
-                        final selectedAddress = address ??
-                            (await FlutterBluetoothPrinter.selectDevice(
-                                    context))
-                                ?.address;
+                        final selectedAddress =
+                            address ?? (await FlutterBluetoothPrinter.selectDevice(context))?.address;
 
                         if (context.mounted && selectedAddress != null) {
                           PrintingProgressDialog.print(
@@ -183,6 +180,7 @@ class _ReceiptPageState extends State<ReceiptPage> {
 class PrintingProgressDialog extends StatefulWidget {
   final String device;
   final ReceiptController controller;
+
   const PrintingProgressDialog({
     super.key,
     required this.device,
@@ -191,6 +189,7 @@ class PrintingProgressDialog extends StatefulWidget {
 
   @override
   State<PrintingProgressDialog> createState() => _PrintingProgressDialogState();
+
   static void print(
     BuildContext context, {
     required String device,
@@ -209,6 +208,7 @@ class PrintingProgressDialog extends StatefulWidget {
 
 class _PrintingProgressDialogState extends State<PrintingProgressDialog> {
   double? progress;
+
   @override
   void initState() {
     super.initState();
