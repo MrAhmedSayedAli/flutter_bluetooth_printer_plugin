@@ -117,6 +117,10 @@ public class FlutterBluetoothPrinterPlugin implements FlutterPlugin, ActivityAwa
     private boolean ensurePermission(boolean request) {
         if (SDK_INT >= Build.VERSION_CODES.M) {
             if (SDK_INT >= 31) {
+                if (activity == null) {
+                    return false;
+                }
+
                 final boolean bluetooth = activity.checkSelfPermission(Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED;
                 final boolean bluetoothScan = activity.checkSelfPermission(Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED;
                 final boolean bluetoothConnect = activity.checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED;
@@ -128,7 +132,7 @@ public class FlutterBluetoothPrinterPlugin implements FlutterPlugin, ActivityAwa
                 if (!request) return false;
                 activity.requestPermissions(new String[]{Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN, Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT}, 919191);
             } else {
-                if(activity == null){
+                if (activity == null) {
                     return false;
                 }
 
