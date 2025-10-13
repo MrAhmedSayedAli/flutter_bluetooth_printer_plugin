@@ -20,7 +20,27 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer_platform_interface/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer_platform_interface/build" />
     </content>
+    <content url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer">
+      <sourceFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/example/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/example/android/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/example/android/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/example/ios/Flutter" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/example/ios/Pods" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/example/ios/.symlinks" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/example/macos/Flutter" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/example/macos/Pods" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/flutter_bluetooth_printer/example/macos/.symlinks" />
+    </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />
+    <orderEntry type="library" name="Dart Packages" level="project" />
   </component>
 </module>
