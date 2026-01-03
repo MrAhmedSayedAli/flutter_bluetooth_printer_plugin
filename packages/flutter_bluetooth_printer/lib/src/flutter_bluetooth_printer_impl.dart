@@ -12,6 +12,65 @@ abstract class PaperSize {
   String get name;
 }
 
+class PaperSize110 implements PaperSize {
+  const PaperSize110();
+
+  @override
+  int get width => 832;
+
+  @override
+  double get paperWidthMM => 110;
+
+  @override
+  String get name => 'Roll Paper 110mm';
+}
+
+class PaperSize80 implements PaperSize {
+  const PaperSize80();
+
+  @override
+  int get width => 576;
+
+  @override
+  double get paperWidthMM => 80;
+
+  @override
+  String get name => 'Roll Paper 80mm';
+}
+
+class PaperSize58 implements PaperSize {
+  const PaperSize58();
+
+  @override
+  int get width => 360;
+
+  @override
+  double get paperWidthMM => 58;
+
+  @override
+  String get name => 'Roll Paper 58mm';
+}
+
+class PaperSize57 implements PaperSize {
+  const PaperSize57();
+
+  @override
+  int get width => 384;
+
+  @override
+  double get paperWidthMM => 57;
+
+  @override
+  String get name => 'Roll Paper 57mm';
+}
+
+class PaperSizes {
+  static const PaperSize mm57 = PaperSize57();
+  static const PaperSize mm58 = PaperSize58();
+  static const PaperSize mm80 = PaperSize80();
+  static const PaperSize mm110 = PaperSize110();
+}
+
 /*
 enum PaperSize {
   // original is 384 => 48 * 8
@@ -121,7 +180,7 @@ class FlutterBluetoothPrinter {
       // waiting for printer initialized and buffers cleared
       await Future.delayed(const Duration(milliseconds: 400));
 
-      final additional = paperSize == PaperSize.mm58
+      final additional = paperSize.width == PaperSizes.mm58.width
           ? <int>[
               for (int i = 0; i < addFeeds; i++) ...Commands.carriageReturn,
             ]
