@@ -388,7 +388,7 @@ public class FlutterBluetoothPrinterPlugin implements
                             }
 
                             // MOD: small settle delay to allow printer firmware to process the last bytes
-                            try { Thread.sleep(400); } catch (InterruptedException ignored) {}
+                            try { Thread.sleep(120); } catch (InterruptedException ignored) {}
 
                             // COMPLETED state
                             mainThread.post(() -> channel.invokeMethod("didUpdateState", 3));
