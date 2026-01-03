@@ -187,7 +187,8 @@ class ReceiptState extends State<Receipt> {
       addFeeds: addFeeds,
       cutPaper: cutPaper,
       keepConnected: keepConnected,
-      maxBufferSize: bytes.length,
+      // maxBufferSize: bytes.length,
+      maxBufferSize: maxBufferSize,
       delayTime: delayTime,
     );
   }

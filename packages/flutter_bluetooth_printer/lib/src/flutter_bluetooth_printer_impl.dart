@@ -189,7 +189,7 @@ class FlutterBluetoothPrinter {
             ];
 
       final printResult = await printBytes(
-        keepConnected: true,
+        keepConnected: keepConnected,
         address: address,
         data: Uint8List.fromList([...imageData, ...reset, ...additional, if (cutPaper) ...Commands.cutPaper]),
         onProgress: onProgress,

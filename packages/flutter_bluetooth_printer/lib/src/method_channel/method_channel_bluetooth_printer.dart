@@ -170,20 +170,12 @@ class MethodChannelBluetoothPrinter extends FlutterBluetoothPrinterPlatform {
       _isBusy = true;
       _init();
 
-      await discovery
-          .firstWhere((element) => element is BluetoothDevice && element.address == address)
-          .timeout(const Duration(seconds: 10));
+      //await discovery.firstWhere((element) => element is BluetoothDevice && element.address == address).timeout(const Duration(seconds: 10));
 
-      final res = await channel.invokeMethod('connect', {
-        'address': address,
-      });
+      final res = await channel.invokeMethod('connect', {'address': address});
 
-      if (res is bool) {
-        return res;
-      }
-
-      return false;
-    } catch (e) {
+      return res is bool ? res : false;
+    } catch (_) {
       return false;
     } finally {
       _isBusy = false;
