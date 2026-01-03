@@ -6,6 +6,13 @@ class DiscoveryResult extends DiscoveryState {
   DiscoveryResult({required this.devices});
 }
 
+abstract class PaperSize {
+  int get width;
+  double get paperWidthMM;
+  String get name;
+}
+
+/*
 enum PaperSize {
   // original is 384 => 48 * 8
   mm58(360, 58, 'Roll Paper 58mm'),
@@ -22,7 +29,7 @@ enum PaperSize {
     this.name,
   );
 }
-
+*/
 class FlutterBluetoothPrinter {
   static Stream<DiscoveryState> _discovery() async* {
     final result = <BluetoothDevice>[];
@@ -37,8 +44,7 @@ class FlutterBluetoothPrinter {
     }
   }
 
-  static ValueNotifier<BluetoothConnectionState> get connectionStateNotifier =>
-      FlutterBluetoothPrinterPlatform.instance.connectionStateNotifier;
+  static ValueNotifier<BluetoothConnectionState> get connectionStateNotifier => FlutterBluetoothPrinterPlatform.instance.connectionStateNotifier;
 
   static Stream<DiscoveryState> get discovery => _discovery();
 
@@ -89,7 +95,7 @@ class FlutterBluetoothPrinter {
     required Uint8List imageBytes,
     required int imageWidth,
     required int imageHeight,
-    PaperSize paperSize = PaperSize.mm58,
+    required PaperSize paperSize, // = PaperSize.mm58,
     ProgressCallback? onProgress,
     int addFeeds = 0,
     bool cutPaper = false,
@@ -126,12 +132,7 @@ class FlutterBluetoothPrinter {
       final printResult = await printBytes(
         keepConnected: true,
         address: address,
-        data: Uint8List.fromList([
-          ...imageData,
-          ...reset,
-          ...additional,
-          if (cutPaper) ...Commands.cutPaper
-        ]),
+        data: Uint8List.fromList([...imageData, ...reset, ...additional, if (cutPaper) ...Commands.cutPaper]),
         onProgress: onProgress,
         maxBufferSize: maxBufferSize,
         delayTime: delayTime,
